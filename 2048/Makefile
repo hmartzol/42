@@ -1,39 +1,49 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abrisse <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/01/29 20:58:36 by abrisse           #+#    #+#              #
-#    Updated: 2016/01/30 10:13:36 by malaine          ###   ########.fr        #
+#    Created: 2016/01/30 22:39:21 by hmartzol          #+#    #+#              #
+#    Updated: 2016/01/31 03:08:12 by hmartzol         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
-NAME =	game_2048
+NAME = game_2048
 
-SRC =	main.c 
+SRC = main.c ft_menu.c ft_menu_main.c ft_init_term.c ft_free_menu.c ft_ptnew.c\
+	  print_grid.c ft_size_window.c
+OBJ = $(patsubst %.c, %.o, $(SRC))
 
-OBJ =	main.o
+CC = gcc
 
-FLAGS =	-Wall -Wextra -Werror -lncurses libft/*.c
+INCLUDE = -I./libft/libft.h
+LIBS = -lncurses -L libft/ -lft
+FLAGS = -Wall -Wextra -Werror
 
+.PHONY: all
 all: $(NAME)
 
-$(NAME):
-		make -C libft/ fclean && make -C libft/
-		gcc -o $(NAME) $(SRC) $(FLAGS)
+$(NAME): $(OBJ) libft
+	@echo Compiling $(NAME)
+	$(CC) $(FLAGS) $(INCLUDE) $(OBJ) -o $(NAME) $(LIBS)
 
+.PHONY: libft
+libft:
+	@echo Compiling/linking libft.a
+	make -C libft/
+
+%.o: %.c
+	$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+
+.PHONY: clean
 clean:
-		/bin/rm -f $(OBJ)
-		make -C libft/ clean
+	rm -rf $(OBJ)
 
-fclean:	clean
-		/bin/rm -f $(NAME)
-		make -C libft/ fclean
+.PHONY: fclean
+fclean: clean
+	rm -rf $(NAME)
 
+.PHONY: re
 re: fclean all
-
-allclean: all clean
-
-reclean: re clean

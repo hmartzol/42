@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ptnew.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/30 20:40:12 by hmartzol          #+#    #+#             */
-/*   Updated: 2016/01/31 03:45:04 by hmartzol         ###   ########.fr       */
+/*   Created: 2016/01/31 01:29:49 by hmartzol          #+#    #+#             */
+/*   Updated: 2016/01/31 01:52:10 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_2048.h"
 
-int		main(void)
+t_point	*ft_ptnew(int x, int y)
 {
-//	ft_menu_main();
-	print_grid(NULL);
-	return (0);
+	t_point	*out;
+
+	if ((out = (t_point*)malloc(sizeof(t_point))) == NULL)
+		return (NULL);
+	out->x = x;
+	out->y = y;
+	return (out);
 }

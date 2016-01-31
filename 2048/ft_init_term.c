@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_init_term.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 20:40:12 by hmartzol          #+#    #+#             */
-/*   Updated: 2016/01/31 03:45:04 by hmartzol         ###   ########.fr       */
+/*   Updated: 2016/01/30 21:55:48 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_2048.h"
 
-int		main(void)
+WINDOW	*ft_init_term(int mbuff, int mecho, int mkey, int mcurs)
 {
-//	ft_menu_main();
-	print_grid(NULL);
-	return (0);
+	WINDOW	*out;
+
+	out = initscr();
+	start_color();
+	if (mbuff == 1)
+		cbreak();
+	if (mbuff == 2)
+		raw();
+	if (mecho)
+		echo();
+	else
+		noecho();
+	keypad(out, mkey);
+	curs_set(mcurs);
+	return (out);
 }
