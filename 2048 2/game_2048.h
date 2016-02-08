@@ -6,14 +6,14 @@
 /*   By: abrisse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 20:54:27 by abrisse           #+#    #+#             */
-/*   Updated: 2016/01/31 23:36:42 by hmartzol         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:29:26 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_2048_H
 # define GAME_2048_H
 
-# include "libft/libft.h"
+# include <libft.h>
 # include <stdlib.h>
 # include <time.h>
 # include <signal.h>

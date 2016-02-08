@@ -6,7 +6,7 @@
 #    By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/30 22:39:21 by hmartzol          #+#    #+#              #
-#    Updated: 2016/01/31 23:35:50 by hmartzol         ###   ########.fr        #
+#    Updated: 2016/02/08 17:27:20 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ = $(patsubst %.c, %.o, $(SRC))
 
 CC = gcc
 
-INCLUDE = -I./libft/libft.h
+INCLUDE = -I./libft/
 LIBS = -lncurses -L libft/ -lft
 FLAGS = -Wall -Wextra -Werror
 
