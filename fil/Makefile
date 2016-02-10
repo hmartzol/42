@@ -3,55 +3,60 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mjuffard <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/02/07 21:24:41 by mjuffard          #+#    #+#              #
-#    Updated: 2016/02/08 19:15:01 by mjuffard         ###   ########.fr        #
+#    Created: 2016/01/30 23:15:42 by hmartzol          #+#    #+#              #
+#    Updated: 2016/02/09 23:11:58 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_PATH = ./src/
-INC_PATH = ./inc/
-LIB_PATH = ./lib/
-OBJ_PATH = ./obj/
+NAME =		fillit
 
-SRC_NAME = ft_check_tetri.c \
-		   ft_count_tetri.c
-LIB_NAME = -lft
-OBJ_NAME = $(SRC_NAME:.c=.o)
+SRCDIR =	src
+OBJDIR =	OBJ
+INCDIR =	includes
 
-SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
-INC = $(addprefix -I,$(INC_PATH))
-LIB = $(addprefix -L,$(LIB_PATH))
+MAIN =		main
+ITEMS =		ft_check_tetri
 
-NAME = fillit
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+OBJ =		$(patsubst %, $(OBJDIR)/%.o, $(ITEMS))
 
-all: lib
-	@make fillit
+CC =		gcc
+FLAGS =		-Wall -Wextra -Werror
 
-$(NAME): $(OBJ)
-	$(CC) $(LIB) $(LIB_NAME) $^ -o $@
+INCLUDE =	-I $(INCDIR)/ -I libft/includes/
+LIBS =
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+.PHONY: all
+all: $(NAME)
 
-lib:
-	@make -C ./lib/Libft/
-	@cp ./lib/Libft/libft.h ./inc/
-	@cp ./lib/Libft/libft.a ./lib/
+$(NAME): libft/libft.a auteur $(OBJDIR) $(OBJ)
+	$(CC) $(FLAGS) $(INCLUDE) $(LIBS) src/$(MAIN).c $(OBJ) libft/libft.a -o $@
 
+libft/libft.a:
+	make re -C libft/
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(FLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
+
+.PHONY: clean
 clean:
-	rm -rf $(OBJ) $(OBJ_PATH)
-	@make clean -C ./lib/Libft/
+	rm -rf $(OBJDIR)
 
+.PHONY: fclean
 fclean: clean
 	rm -rf $(NAME)
-	@make fclean -C ./lib/Libft/
 
+.PHONY: re
 re: fclean all
 
-.PHONY: re fclean clean lib
+.PHONY: norm
+norm:
+	clear
+	norminette $(patsubst %, $(SRCDIR)/%.c, $(ITEMS)) $(SRCDIR)/$(MAIN).c $(INCDIR)/fillit.h
+
+auteur:
+	echo "hmartzol mjuffard" > auteur

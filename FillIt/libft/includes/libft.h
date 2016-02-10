@@ -6,7 +6,7 @@
 /*   By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:39:36 by hmartzol          #+#    #+#             */
-/*   Updated: 2016/02/08 21:15:04 by hmartzol         ###   ########.fr       */
+/*   Updated: 2016/02/10 04:35:45 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct		s_alist
 	struct s_alist	*last;
 	struct s_alist	*next;
 }					t_alist;
+
+typedef struct		s_point
+{
+	int x;
+	int y;
+}					t_point;
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -117,5 +123,7 @@ t_alist				*ft_alstdelnode(t_alist *lst, void (*del)(void *, size_t));
 int					ft_isspace(int c);
 int					ft_strcntc(char const *str, char c);
 char				*ft_readfile(int fd);
+t_point				ft_ptinit(t_point *p, int x, int y);
+t_point				*ft_ptnew(int x, int y);
 
 #endif

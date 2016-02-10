@@ -6,7 +6,7 @@
 #    By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/30 23:15:42 by hmartzol          #+#    #+#              #
-#    Updated: 2016/02/08 21:16:18 by hmartzol         ###   ########.fr        #
+#    Updated: 2016/02/10 04:36:27 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ ITEMS =		ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr \
 			ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd ft_lstnew \
 			ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap ft_puttab \
 			ft_puttab_fd ft_putlist ft_putlist_fd ft_lstappend ft_isspace \
-			ft_strcntc ft_readfile
+			ft_strcntc ft_readfile ft_ptinit ft_ptnew
 
 OBJ =		$(patsubst %, $(OBJDIR)/%.o, $(ITEMS))
 

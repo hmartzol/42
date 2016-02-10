@@ -6,7 +6,7 @@
 #    By: hmartzol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/30 23:15:42 by hmartzol          #+#    #+#              #
-#    Updated: 2016/02/08 20:49:01 by hmartzol         ###   ########.fr        #
+#    Updated: 2016/02/10 04:39:06 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OBJDIR =	OBJ
 INCDIR =	includes
 
 MAIN =		main
-ITEMS =		
+ITEMS =		error solve
 
 OBJ =		$(patsubst %, $(OBJDIR)/%.o, $(ITEMS))
 
@@ -25,13 +25,13 @@ CC =		gcc
 FLAGS =		-Wall -Wextra -Werror
 
 INCLUDE =	-I $(INCDIR)/ -I libft/includes/
-LIBS =		-L libft/ -lft
+LIBS =
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): libft/libft.a auteur $(OBJDIR) $(OBJ)
-	$(CC) $(FLAGS) $(INCLUDE) $(LIBS) src/$(MAIN).c libft/libft.a -o $@
+	$(CC) $(FLAGS) $(INCLUDE) $(LIBS) src/$(MAIN).c $(OBJ) libft/libft.a -o $@
 
 libft/libft.a:
 	make re -C libft/
@@ -56,7 +56,7 @@ re: fclean all
 .PHONY: norm
 norm:
 	clear
-	norminette $(patsubst %, $(SRCDIR)/%.c, $(ITEMS)) $(INCDIR)/libft.h
+	norminette $(patsubst %, $(SRCDIR)/%.c, $(ITEMS)) $(SRCDIR)/$(MAIN).c $(INCDIR)/fillit.h
 
 auteur:
-	echo "hmartzol\n" > auteur
+	echo "hmartzol mjuffard" > auteur
